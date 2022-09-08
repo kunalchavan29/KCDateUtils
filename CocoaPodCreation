@@ -1,0 +1,24 @@
+sudo gem install cocoapods
+pod --version
+
+pod lib create KCDateUtils //or create framework using xcode
+push it to git repo
+
+pod trunk register kunalchavan29@gmail.com 'Kunal Chavan' --description='macbook pro'
+
+=======
+(Everytime you Make changes in library, update the pod spec version, push the changes and tag the release with same version in podspecs and follow below command)
+-> KCDateUtils % git commit -m "changes made"
+-> KCDateUtils % git push
+-> KCDateUtils % git tag 0.0.2
+-> KCDateUtils % git push origin 0.0.2
+======
+
+//if podspec is not present 
+pod spec create KCDateUtils
+
+-> KCDateUtils % pod lib lint
+-> KCDateUtils % pod trunk push
+
+-> OtherProject % pod repo update
+-> OtherProject % pod install
