@@ -9,25 +9,28 @@ import XCTest
 @testable import KCDateUtils
 
 class KCDateUtilsTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var utils: KCDateUtils!
+    var testDate: Date!
+    
+    override func setUp() {
+        utils = KCDateUtils()
+        testDate = getDateFromString(dateString: "2022-01-01T11:42:00")!
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    private func getDateFromString(dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+        return dateFormatter.date(from: dateString)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testGetDay() {
+        XCTAssertEqual(KCDateUtils.getDay(date: testDate), 1)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testMonthsFrom() {
+        XCTAssertEqual(getDateFromString(dateString: "2022-04-01T11:42:00")!.monthsFrom(date: testDate), 3)
     }
-
 }
